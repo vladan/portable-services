@@ -1,0 +1,17 @@
+[Unit]
+Description=Synapse - Matrix homeserver
+After=network-online.target
+Requires=network-online.target
+
+[Service]
+MemoryDenyWriteExecute=no
+
+Environment=LANG=en_US.UTF-8
+Environment=SYNAPSE_LOG_LEVEL=DEBUG
+Environment=PYTHONDONTWRITEBYTECODE=1
+
+ExecStart=/usr/bin/python3 -m synapse.app.homeserver -c /etc/matrix/homeserver.yaml
+ExecStop=/usr/bin/synctl stop /etc/matrix/homeserver.yaml
+
+StateDirectory=matrix-synapse
+ConfigurationDirectory=matrix

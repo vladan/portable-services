@@ -9,15 +9,19 @@ apk --no-cache add --virtual .synapse-build \
     libressl-dev \
     libxslt-dev \
     linux-headers \
-    npm \
     python3-dev \
+    yarn \
     zlib-dev
 
 pip3 install --upgrade pip setuptools
 pip3 install https://github.com/matrix-org/synapse/tarball/master
 pip3 install mautrix-telegram
 
-npm install matrix-appservice-irc --global
+IRC_DIR=/usr/lib/matrix-appservice-irc/
+mkdir ${IRC_DIR}
+cd ${IRC_DIR}
+yarn add matrix-appservice-irc
+ln -s ${IRC_DIR}/node_modules/matrix-appservice-irc/bin/matrix-appservice-irc /usr/local/bin/matrix-appservice-irc
 
 apk del .synapse-build
 
@@ -31,7 +35,13 @@ apk --no-cache add \
 
 find /usr -name "__pycache__" -exec rm -rf {} +
 find /usr -name "*.pyc" -exec rm {} +
-rm -rf /root/.cache \
+find /usr -name "*yarn*" -exec rm -rf {} +
+find / -name "*node-gyp*" -exec rm -rf {} +
+
+apk del alpine-keys
+
+rm -rf /etc/apk \
+       /root/.cache \
        /root/.config \
        /root/.npm \
-       /etc/apk
+       /var/cache/*
