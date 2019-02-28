@@ -1,6 +1,6 @@
 #!/bin/sh
 
-ROOTFS=rootfs
+ROOTFS=/tmp/matrix
 
 wget http://dl-cdn.alpinelinux.org/alpine/v3.9/releases/x86_64/alpine-minirootfs-3.9.0-x86_64.tar.gz
 
@@ -16,9 +16,8 @@ mkdir -p $ROOTFS/etc/systemd/system \
 
 touch $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
 
-cp scripts/install.sh $ROOTFS/root/
-sudo systemd-nspawn -D $ROOTFS/ /bin/sh /root/install.sh
+sudo systemd-nspawn --bind=$PWD/scripts/install.sh:/root/install.sh -D $ROOTFS/ /bin/sh /root/install.sh
 
 cp systemd/* $ROOTFS/etc/systemd/system/
 
-mksquashfs $ROOTFS/ matrix.raw
+mksquashfs $ROOTFS/ /tmp/matrix.raw
