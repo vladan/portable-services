@@ -15,20 +15,12 @@ apk --no-cache add --virtual .synapse-build \
 
 pip3 install --upgrade pip setuptools
 pip3 install https://github.com/matrix-org/synapse/tarball/master
-pip3 install mautrix-telegram
 
-install_appservice() {
-    PKG=$1
-    LIBDIR=/usr/lib/${PKG}
-
-    mkdir -p ${LIBDIR}
-    cd ${LIBDIR}
-    yarn add ${PKG}
-    ln -s ${IRC_DIR}/node_modules/${PKG}/bin/${PKG} /usr/local/bin/${PKG}
-}
-
-install_appservice matrix-appservice-irc
-install_appservice matrix-appservice-slack
+IRC_DIR=/usr/lib/matrix-appservice-irc/
+mkdir ${IRC_DIR}
+cd ${IRC_DIR}
+yarn add matrix-appservice-irc
+ln -s ${IRC_DIR}/node_modules/matrix-appservice-irc/bin/matrix-appservice-irc /usr/local/bin/matrix-appservice-irc
 
 apk del .synapse-build
 
