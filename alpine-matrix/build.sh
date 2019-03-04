@@ -13,11 +13,10 @@ mkdir -p $ROOTFS/etc/systemd/system \
          $ROOTFS/{dev,tmp,proc,root,run,sys} \
          $ROOTFS/etc/matrix \
          $ROOTFS/var/lib/matrix-{synapse,appservice-irc}
+touch    $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
 
 touch $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
-
-sudo systemd-nspawn --bind=$PWD/scripts/install.sh:/root/install.sh -D $ROOTFS/ /bin/sh /root/install.sh
-
 cp systemd/* $ROOTFS/etc/systemd/system/
 
+sudo systemd-nspawn --bind=$PWD/scripts/install.sh:/root/install.sh -D $ROOTFS/ /bin/sh /root/install.sh
 mksquashfs $ROOTFS/ /tmp/matrix.raw
