@@ -1,11 +1,12 @@
 #!/bin/sh
 
 ROOTFS=/tmp/matrix
+ALPINE_TARBALL=alpine-minirootfs-3.9.2-x86_64.tar.gz
 
-wget http://dl-cdn.alpinelinux.org/alpine/v3.9/releases/x86_64/alpine-minirootfs-3.9.0-x86_64.tar.gz
+wget http://dl-cdn.alpinelinux.org/alpine/v3.9/releases/x86_64/$ALPINE_TARBALL
 
 mkdir -p $ROOTFS
-tar xf alpine-minirootfs-3.9.0-x86_64.tar.gz -C $ROOTFS/ \
+tar xf $ALPINE_TARBALL -C $ROOTFS/ \
     ./etc/apk ./etc/os-release ./usr ./lib ./bin ./sbin ./var
 
 mkdir -p $ROOTFS/etc/systemd/system \
