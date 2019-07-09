@@ -1,0 +1,26 @@
+[Unit]
+Description=Gitea (Git with a cup of tea)
+After=network.target
+#Requires=mysql.service
+#Requires=mariadb.service
+#Requires=postgresql.service
+#Requires=memcached.service
+#Requires=redis.service
+
+[Service]
+Type=simple
+User=gitea
+Group=www-data
+
+Environment=USER=gitea HOME=/var/lib/gitea GITEA_WORK_DIR=/var/lib/gitea
+WorkingDirectory=/var/lib/gitea
+
+ExecStart=/bin/ls -al /etc/gitea/
+#ExecStart=/usr/bin/gitea web -c /etc/gitea/app.ini
+
+RuntimeDirectory=gitea
+StateDirectory=gitea
+ConfigurationDirectory=gitea
+
+[Install]
+WantedBy=multi-user.target

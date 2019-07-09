@@ -1,9 +1,9 @@
 #!/bin/sh
 
-ROOTFS=/tmp/matrix
+ROOTFS=/tmp/cgit
 ALPINE_TARBALL=alpine-minirootfs-3.9.2-x86_64.tar.gz
 
-wget http://dl-cdn.alpinelinux.org/alpine/v3.9/releases/x86_64/$ALPINE_TARBALL
+# wget http://dl-cdn.alpinelinux.org/alpine/v3.9/releases/x86_64/$ALPINE_TARBALL
 
 mkdir -p $ROOTFS
 tar xf $ALPINE_TARBALL -C $ROOTFS/ \
@@ -12,12 +12,12 @@ tar xf $ALPINE_TARBALL -C $ROOTFS/ \
 mkdir -p $ROOTFS/etc/systemd/system \
          $ROOTFS/var/{lib,run,tmp} \
          $ROOTFS/{dev,tmp,proc,root,run,sys} \
-         $ROOTFS/etc/matrix \
-         $ROOTFS/var/lib/matrix-{synapse,appservice-irc}
+         $ROOTFS/etc/git \
+         $ROOTFS/var/lib/git
 touch    $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
 
-touch $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
+sudo systemd-nspawn --directory $ROOTFS/ /sbin/apk update
+sudo systemd-nspawn --directory $ROOTFS/ /sbin/apk add cgit uwsgi-cgi
 cp systemd/* $ROOTFS/etc/systemd/system/
 
-sudo systemd-nspawn --bind=$PWD/scripts/install.sh:/root/install.sh -D $ROOTFS/ /bin/sh /root/install.sh
-mksquashfs $ROOTFS/ /tmp/matrix.raw
+mksquashfs $ROOTFS/ $ROOTFS.raw

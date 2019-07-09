@@ -1,0 +1,10 @@
+[Unit]
+Description=cgit socket
+
+[Socket]
+ListenStream=/run/git/cgit.sock
+SocketMode=0660
+SocketGroup=http
+
+[Install]
+WantedBy=sockets.target
