@@ -18,7 +18,6 @@ mkdir -p \
 
 touch $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
 
-touch $ROOTFS/etc/machine-id $ROOTFS/etc/resolv.conf
 cp systemd/* $ROOTFS/etc/systemd/system/
 
 sudo systemd-nspawn --bind=$PWD/scripts/install.sh:/root/install.sh -D $ROOTFS/ /bin/sh /root/install.sh
