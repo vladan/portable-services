@@ -10,7 +10,7 @@ After=network.target
 #Requires=redis.service
 
 [Service]
-User=git
+User=gitea
 Group=www-data
 WorkingDirectory=/var/lib/gitea
 Environment=USER=git HOME=/var/lib/gitea GITEA_WORK_DIR=/var/lib/gitea
