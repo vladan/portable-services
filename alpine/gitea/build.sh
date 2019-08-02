@@ -11,7 +11,7 @@ IMAGE=/tmp/$NAME.raw
 
 ALPINE_TARBALL=alpine-minirootfs-$ALPINE_VERSION.$ALPINE_RELEASE-x86_64.tar.gz
 
-[ -f $NAME.raw     ] && rm $NAME.raw
+[ -f $IMAGE.raw      ] && rm $IMAGE.raw
 [ -f $ALPINE_TARBALL ] || wget http://dl-cdn.alpinelinux.org/alpine/v$ALPINE_VERSION/releases/x86_64/$ALPINE_TARBALL
 
 (sudo systemctl stop $NAME.service && sudo portablectl detach $NAME) || echo "Image not attached."
