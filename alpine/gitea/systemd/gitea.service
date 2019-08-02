@@ -10,13 +10,13 @@ After=network.target
 #Requires=redis.service
 
 [Service]
+RestartSec=2s
+Restart=always
 User=gitea
 Group=www-data
 WorkingDirectory=/var/lib/gitea
-Environment=USER=git HOME=/var/lib/gitea GITEA_WORK_DIR=/var/lib/gitea
-
+Environment=USER=gitea HOME=/var/lib/gitea GITEA_WORK_DIR=/var/lib/gitea
 ExecStart=/usr/bin/gitea web -c /etc/gitea/app.ini
-
 StateDirectory=gitea
 ConfigurationDirectory=gitea
 
