@@ -38,5 +38,5 @@ through the web UI, but here goes.
 ## TODO
 
 * Instructions for setting up SSH with Gitea's built-in SSH server and the SSH
-  server running on the host.
+  server running on the host. https://docs.gitea.io/en-us/install-with-docker/
 * Real world configuration.
