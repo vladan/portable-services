@@ -1,0 +1,12 @@
+[Unit]
+Description=cgit uwsgi service
+After=network.target
+Before=nginx.service
+Requires=cgit.socket
+
+[Service]
+User=cgit
+Group=cgit
+
+ConfigurationDirectory=cgit
+StateDirectory=cgit
