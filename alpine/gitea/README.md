@@ -33,3 +33,10 @@ through the web UI, but here goes.
 
 4. **YOU'LL NEED TO UPDATE** `INSTALL_LOCK = true` in app.ini to continue using
    Gitea without being redirected to /install.
+
+
+## TODO
+
+* Instructions for setting up SSH with Gitea's built-in SSH server and the SSH
+  server running on the host.
+* Real world configuration.
