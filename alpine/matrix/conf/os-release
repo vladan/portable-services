@@ -1,0 +1,4 @@
+PORTABLE_PRETTY_NAME="Synapse: A matrix homeserver"
+PORTABLE_ID=synapse
+PRETTY_NAME=Alpine
+ID=alpine
