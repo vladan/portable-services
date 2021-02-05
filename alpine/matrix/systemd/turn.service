@@ -1,0 +1,13 @@
+[Unit]
+Description=Coturn - TURN/STUN server
+Requires=network-online.target
+
+[Service]
+Environment=LANG=en_US.UTF-8
+
+ExecStart=/usr/bin/turnserver -c /etc/coturn/turnserver.conf
+Restart=on-failure
+
+StateDirectory=turn
+RuntimeDirectory=turn
+ConfigurationDirectory=turn
